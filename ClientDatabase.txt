@@ -1,0 +1,101 @@
+An Enterprise Web Application (EWP) typically follows a multi-tier architecture, 
+which includes the following layers:
+
+1 Presentation Layer (Client-Side) aka The user interface(UI) "Front-end":
+This is the front-end part of the application 
+where users interact with the application through a web browser.
+Technologies used: HTML, CSS, JavaScript, and frameworks like React, Angular, or Vue.js.
+
+2 Business Logic Layer (Server-Side)"Back-end":
+This layer contains the core functionality 
+and business logic of the application.
+It processes user inputs, makes decisions, and performs calculations.
+Technologies used: webserver:(Tomcat, Apache, Nginx, etc.)
+Aplication Server:Java (Spring, Java EE), .NET, Node.js, etc.
+This layer is needed for the client and database to interact
+
+3 Data Access Layer "Back-end":
+This layer handles the interaction with the database.
+It performs CRUD (Create, Read, Update, Delete) operations.
+Technologies used: JDBC, JPA, Hibernate, MyBatis, etc.
+
+4 Database Layer "Back-end":
+This is where the data is stored and managed.
+It can be a relational database (MySQL, PostgreSQL) or
+ a NoSQL database (MongoDB, Cassandra).
+
+
+
+
+Typical Workflow of a Web Application (EWP):
+Client Request:
+The user interacts with the web application through their browser, 
+sending an HTTP request to the server.
+Examples: Clicking website links, performing Google searches, 
+or submitting a login form with a password.
+
+Request Handling (Routing):
+The server receives the request and routes it to the appropriate controller 
+or handler based on the URL and method (e.g., GET, POST).
+Example: A GET request to /products retrieves a list of products, 
+or a POST request to /login submits user credentials.
+
+Business Logic Execution(processing):
+The controller processes the request by invoking the 
+necessary business logic to fulfill the action.
+Examples: Validating user login credentials 
+or processing a search query to match user input.
+
+Data Access(processing):
+If the business logic requires data, 
+the server interacts with a database 
+or other storage system to fetch, store, or update the data.
+Examples: Retrieving a user profile from a SQL database or fetching product details from a catalog table.
+
+Response Generation(Response/Rendering):
+The server generates an HTTP response, 
+which may include HTML for rendering in the browser 
+or data formats like JSON or XML for API responses.
+
+Client Response:
+The response is sent back to the client. 
+The browser then renders the data or updates the UI accordingly.
+Examples: Displaying a user dashboard after login or showing search results on the page.
+
+In Springboot there are 3 layers each are classes:
+
+The controller: hanldes Requests such as GET, POST, PUT, DELETE, PATCH, HEAD, OPTIONS, TRACE
+there are 2 ways to set up a controller, one is to use @RestController and the other is to use @Controller
+@RestController is used for RESTful web services and returns data in JSON or XML format
+aka the API.
+@Controller is used for MVC web applications and returns a view
+this returns a html page for the user aka the web page.
+Make sure to use either @RestController or @Controller to let spring know that 
+this class is a controller for the web page or API.
+you can set up paths for each request, ie @GetMapping("/products")
+will get you the products page.
+You can think of it as a traffic cop that directs incoming requests to the appropriate service.
+
+Services: handles business logic.
+such as validation, calculations, Lists of data, etc.
+You want to set up methods that will be called by the controller
+using the @Service annotation will let spring know that this class is a service class.
+you can think of it as a manager that coordinates the work of multiple employees.
+
+
+Repositry: interacts the database
+such as CRUD operations, queries, etc.
+you want to set up methods that will be called by the service
+using the @Repositry annotation will let spring know that this class is a repositry class.
+you can think of it as a librarian that manages the books in the library.
+Databases to you can use: MySQL, PostgreSQL, MongoDB, Cassandra, etc.
+if you are going to use a database you will need to understad SQL, JDBC, JPA, Hibernate, MyBatis, etc.
+you will also need to understand how queries work and how to set up a database.
+
+if each class needs to interact with each other an object of 
+the necessary class is created in the class that needs it.
+ex.
+class Controller{
+Services service;
+
+}
